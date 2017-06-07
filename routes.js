@@ -11,4 +11,5 @@ module.exports = (app) => {
   app.post('/login', auth.loginUser);
   app.get('/me',auth.me);
   app.get('/restaurants',lunch.restaurants);
+  app.post('/placeOrder',lunch.placeOrder);
 };

@@ -18,12 +18,27 @@ angular.module('lunch')
             method: 'GET',
             url: '/restaurants'
             }) 
-        }
+        };
 
+        function placeOrder(food,drink,name,id,restaurant,day){
+            return $http({
+                method: 'POST',
+                url: '/placeOrder',
+                data: {
+                food:food,
+                drink:drink,
+                name:name,
+                id:id,
+                restaurant:restaurant,
+                day:day
+                }
+            })
+        }
     
       return{
           me:me,
-          restaurants:restaurants
+          restaurants:restaurants,
+          placeOrder:placeOrder
       }
 
   }

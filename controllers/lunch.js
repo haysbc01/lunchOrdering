@@ -1,4 +1,5 @@
-var Restaurants = require('../models/restaurant.schema.js');
+var Restaurants = require('../models/restaurant.schema.js'),
+    Order = require('../models/order.schema.js');
 
 module.exports = {
     restaurants : (req,res)=>{
@@ -9,5 +10,18 @@ module.exports = {
                 res.send(restaurants)
             }
         })
+    },
+
+    placeOrder : (req,res)=>{
+        var newOrder = new Order(req.body);
+            newOrder.save(function(err,order){
+                if(err){
+                    console.log(err)
+                    res.status(403).send(err)
+                } else{
+                    res.status(200).send(order)
+                }
+            })
     }
 }
+
