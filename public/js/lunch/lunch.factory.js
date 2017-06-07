@@ -20,6 +20,13 @@ angular.module('lunch')
             }) 
         };
 
+        function getMyOrders(id){
+            return $http({
+            method: 'GET',
+            url: '/getMyOrders/'+id
+            })
+        };
+
         function placeOrder(food,drink,name,id,restaurant,day){
             return $http({
                 method: 'POST',
@@ -38,6 +45,7 @@ angular.module('lunch')
       return{
           me:me,
           restaurants:restaurants,
+          getMyOrders:getMyOrders,
           placeOrder:placeOrder
       }
 

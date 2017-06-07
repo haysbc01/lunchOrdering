@@ -7,9 +7,14 @@ module.exports = (app) => {
     res.sendFile('index.html', {root : './public/html'});
   });
 
+  app.get('/getMyOrders/:id', lunch.getMyOrders, (req,res)=>{
+    res.send(req.params.data)
+    });
+
   app.post('/register', auth.registerUser);
   app.post('/login', auth.loginUser);
   app.get('/me',auth.me);
   app.get('/restaurants',lunch.restaurants);
+  app.post('/getMyOrders',lunch.getMyOrders);
   app.post('/placeOrder',lunch.placeOrder);
 };

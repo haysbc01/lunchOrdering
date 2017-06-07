@@ -12,6 +12,16 @@ module.exports = {
         })
     },
 
+    getMyOrders : (req,res)=>{
+        Order.find({id: req.params.id}, (err,foundFiles)=>{
+            if(err){
+                console.log(err);
+            } else {
+                res.send(foundFiles)
+            }
+        })
+    },
+
     placeOrder : (req,res)=>{
         var newOrder = new Order(req.body);
             newOrder.save(function(err,order){

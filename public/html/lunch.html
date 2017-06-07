@@ -1,21 +1,11 @@
 <h1>Hey there {{lunch.data.name}}</h1>
 
-<!--<h6>What day do you want lunch? : </h6>
-<select ng-model="lunch.day">
-    <option value="monday">Monday</option>
-    <option value="tuesday">Tuesday</option>
-    <option value="wednesday">Wednesday</option>
-    <option value="thursday">Thursday</option>
-    <option value="friday">Friday</option>
-</select>
+<button ng-click="lunch.showOptions =! lunch.showOptions">Show Lunch Options</button>
+<button ng-click="lunch.showOrders =! lunch.showOrders">Show My Orders</button>
 
-<h1 ng-if="lunch.day.length>4">Restaurants available for {{lunch.day}}.</h1>
 
-<div ng-repeat="restaurants in lunch.restaurants | filter: lunch.day">
-    <h1>{{restaurants.restaurant}}</h1>
-    <a href="{{restaurants.menu}}" target="_blank">menu</a>
-
-</div>-->
+<!--Order Options-->
+<div ng-show="lunch.showOptions">
 
 <h1>Monday</h1>
 <form ng-repeat="restaurants in lunch.restaurants | filter: 'monday'">
@@ -56,6 +46,20 @@
     <a href="{{restaurants.menu}}" target="_blank">menu</a>
     <br>
     <button type="submit" ng-click="lunch.orderModal(restaurants.restaurant, restaurants.menu, 'Friday')">Order {{restaurants.restaurant}}</button>
+</div>
+
+</div>
+
+
+<!--Past Orders-->
+<div ng-show="lunch.showOrders">
+    <div ng-repeat="orders in lunch.myOrders">
+        <h2>{{orders.day}}</h2>
+        <h3>Restaurant: {{orders.restaurant}}</h3>
+        <h3>Food Ordered: {{orders.food}}</h3>
+        <h3>Drink Ordered: {{orders.drink}}</h3>
+    </div>
+
 </div>
 
 
