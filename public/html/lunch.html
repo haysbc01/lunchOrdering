@@ -1,0 +1,59 @@
+<h1>Hey there {{lunch.data.name}}</h1>
+
+<!--<h6>What day do you want lunch? : </h6>
+<select ng-model="lunch.day">
+    <option value="monday">Monday</option>
+    <option value="tuesday">Tuesday</option>
+    <option value="wednesday">Wednesday</option>
+    <option value="thursday">Thursday</option>
+    <option value="friday">Friday</option>
+</select>
+
+<h1 ng-if="lunch.day.length>4">Restaurants available for {{lunch.day}}.</h1>
+
+<div ng-repeat="restaurants in lunch.restaurants | filter: lunch.day">
+    <h1>{{restaurants.restaurant}}</h1>
+    <a href="{{restaurants.menu}}" target="_blank">menu</a>
+
+</div>-->
+
+<h1>Monday</h1>
+<div ng-repeat="restaurants in lunch.restaurants | filter: 'monday'">
+    <h4>{{restaurants.restaurant}}</h4>
+    <a href="{{restaurants.menu}}" target="_blank">menu</a>
+    <br>
+    <button>Order {{restaurants.restaurant}}</button>
+</div>
+
+<h1>Tuesday</h1>
+<div ng-repeat="restaurants in lunch.restaurants | filter: 'tuesday'">
+    <h4>{{restaurants.restaurant}}</h4>
+    <a href="{{restaurants.menu}}" target="_blank">menu</a>
+    <br>
+    <button>Order {{restaurants.restaurant}}</button>
+</div>
+
+<h1>Wednesday</h1>
+<div ng-repeat="restaurants in lunch.restaurants | filter: 'wednesday'">
+    <h4>{{restaurants.restaurant}}</h4>
+    <a href="{{restaurants.menu}}" target="_blank">menu</a>
+    <br>
+    <button>Order {{restaurants.restaurant}}</button>
+</div>
+
+<h1>Thursday</h1>
+<div ng-repeat="restaurants in lunch.restaurants | filter: 'thursday'">
+    <h4>{{restaurants.restaurant}}</h4>
+    <a href="{{restaurants.menu}}" target="_blank">menu</a>
+    <br>
+    <button>Order {{restaurants.restaurant}}</button>
+</div>
+
+<h1>Friday</h1>
+<div ng-repeat="restaurants in lunch.restaurants | filter: 'friday'">
+    <h4>{{restaurants.restaurant}}</h4>
+    <a href="{{restaurants.menu}}" target="_blank">menu</a>
+    <br>
+    <button>Order {{restaurants.restaurant}}</button>
+</div>
+
