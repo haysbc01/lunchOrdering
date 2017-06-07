@@ -1,5 +1,6 @@
 var auth = require('./controllers/auth'),
-    lunch = require('./controllers/lunch');
+    lunch = require('./controllers/lunch'),
+    admin = require('./controllers/admin');
 
 module.exports = (app) => {
 
@@ -14,6 +15,7 @@ module.exports = (app) => {
   app.post('/register', auth.registerUser);
   app.post('/login', auth.loginUser);
   app.get('/me',auth.me);
+  app.get('/orders',admin.orders);
   app.get('/restaurants',lunch.restaurants);
   app.post('/getMyOrders',lunch.getMyOrders);
   app.post('/placeOrder',lunch.placeOrder);

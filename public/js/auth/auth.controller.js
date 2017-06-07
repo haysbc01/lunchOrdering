@@ -15,8 +15,8 @@ function authCtrl ($http, authFactory){
     }else{
 
         authFactory
-        .register(auth.firstName, auth.registerEmail, auth.registerPassword)
-        .then(auth.register.success, auth.register.error);
+            .register(auth.firstName, auth.registerEmail, auth.registerPassword)
+            .then(auth.register.success, auth.register.error);
         }
     };
 

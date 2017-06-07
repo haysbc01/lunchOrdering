@@ -27,7 +27,7 @@ angular.module('lunch')
             })
         };
 
-        function placeOrder(food,drink,name,id,restaurant,day){
+        function placeOrder(food,drink,name,id,restaurant,day,date){
             return $http({
                 method: 'POST',
                 url: '/placeOrder',
@@ -37,7 +37,8 @@ angular.module('lunch')
                 name:name,
                 id:id,
                 restaurant:restaurant,
-                day:day
+                day:day,
+                date:date
                 }
             })
         }

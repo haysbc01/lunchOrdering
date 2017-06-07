@@ -7,6 +7,7 @@ var orderSchema = new mongoose.Schema({
   name: String,
   id: String,
   day: String,
+  date: String
 });
 
 module.exports = mongoose.model('orders', orderSchema);

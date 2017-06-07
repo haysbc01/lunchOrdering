@@ -1,8 +1,9 @@
 <div class='background'></div>
 
 <!--Login-->
-<form class="login" ng-hide="auth.signUp">
-    <h1 class='form-title'>Login</h1>
+<form class="order" ng-hide="auth.signUp">
+    <h1 class='form-title'>Welcome OneSpace Employee</h1>
+
 
     <div class="form-group">
         <label for="Email">Email address</label>
@@ -19,12 +20,12 @@
         <h3>{{auth.loginError}}</h3>
     </div>
 
-    <h4 ng-click='auth.signUp =! auth.signUp'>Signup for a Free Account</h4>
+    <h4 ng-click='auth.signUp =! auth.signUp'>New to our team? Sign up here.</h4>
 </form>
 
 <!--Register-->
 
-<form class="login-modal" ng-show='auth.signUp'>
+<form class="order" ng-show='auth.signUp'>
   <h1 class='form-title'>Register</h1>
 
     <div class="form-group">

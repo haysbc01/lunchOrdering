@@ -6,15 +6,31 @@ angular.module('lunch')
 
   function adminFactory($http){
 
-      function me(){
-            return $http({
-            method: 'GET',
-            url: '/me'
-            })
-        };
+    function me(){
+        return $http({
+        method: 'GET',
+        url: '/me'
+        })
+    };
+
+    function orders(){
+        return $http({
+        method: 'GET',
+        url: '/orders'
+        })
+    };
+
+    function options(){
+        return $http({
+        method: 'GET',
+        url: '/restaurants'
+        })
+    }
     
       return{
-          me:me
+          me:me,
+          orders:orders,
+          options:options
           
       }
 

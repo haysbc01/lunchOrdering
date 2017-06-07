@@ -6,7 +6,7 @@ lunchCtrl.$inject = ['$http', 'lunchFactory'];
 function lunchCtrl ($http, lunchFactory){
   var lunch = this;
 
-//   lunch.date=Date();
+  lunch.date=new Date(2017, 5, 5).toDateString();
 
     lunch.load = function(){
         lunchFactory
@@ -36,16 +36,27 @@ function lunchCtrl ($http, lunchFactory){
             })
     };
 
-    lunch.orderModal = function(restaurant, menu, day){
+    lunch.orderModal = function(restaurant, menu, day, date){
+        
         lunch.orderModale = true;
         lunch.restaurantChoosen = restaurant;
         lunch.menuChoosen = menu;
-        lunch.day = day;
+        lunch.day = day[0];
+        lunch.date = date
     }
 
     lunch.order = function(){
         lunchFactory
-            .placeOrder(lunch.foodOrder,lunch.drinkOrder,lunch.data.name,lunch.data._id,lunch.restaurantChoosen,lunch.day)
+            .placeOrder(lunch.foodOrder,lunch.drinkOrder,lunch.data.name,lunch.data._id,lunch.restaurantChoosen,lunch.day,lunch.date)
+            .then(lunch.order.success, lunch.order.error)
+    }
+    lunch.order.success = function(){
+        lunch.orderModale=false;
+        lunch.foodOrder='';
+        lunch.drinkOrder='';
+    }
+    lunch.order.error = function(){
+        console.log(error)
     }
 
 
