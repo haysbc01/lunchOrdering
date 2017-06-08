@@ -7,7 +7,19 @@ var orderSchema = new mongoose.Schema({
   name: String,
   id: String,
   day: String,
-  date: String
+  date: String,
+  cost: {
+      typy: Number,
+      default: 0
+  },
+  completed: {
+    type: Boolean,
+    default: false
+  },
+  paid: {
+    type: Boolean,
+    default: false
+  }
 });
 
 module.exports = mongoose.model('orders', orderSchema);

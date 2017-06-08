@@ -6,7 +6,7 @@ lunchCtrl.$inject = ['$http', 'lunchFactory'];
 function lunchCtrl ($http, lunchFactory){
   var lunch = this;
 
-  lunch.date=new Date(2017, 5, 5).toDateString();
+  lunch.employeeBill = 0;
 
     lunch.load = function(){
         lunchFactory
@@ -33,16 +33,25 @@ function lunchCtrl ($http, lunchFactory){
             .getMyOrders(arg._id)
             .then(function(responseData){
                 lunch.myOrders = responseData.data;
+                for(var i=0;i<lunch.myOrders.length;i++){
+                    if(typeof(lunch.myOrders[i].cost)==='number'){
+                        console.log(typeof(lunch.myOrders[i].cost))
+                        lunch.employeeBill += lunch.myOrders[i].cost;
+                    }
+                    
+                    // lunch.employeeBill = lunch.myOrders[i].cost;
+                }
             })
     };
 
-    lunch.orderModal = function(restaurant, menu, day, date){
+    lunch.orderModal = function(restaurant, menu, date){
         
         lunch.orderModale = true;
         lunch.restaurantChoosen = restaurant;
         lunch.menuChoosen = menu;
-        lunch.day = day[0];
-        lunch.date = date
+        lunch.date = date;
+
+        lunch.showOptions=false;
     }
 
     lunch.order = function(){

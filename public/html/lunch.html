@@ -1,90 +1,79 @@
-<h1>Hey there {{lunch.data.name}}</h1>
+<!--<div class="background">-->
+    <h1>Hey there {{lunch.data.name}}</h1>
+    <h1>Outstanding Balance: {{lunch.employeeBill}}</h1>
 
-<button ng-click="lunch.showOptions =! lunch.showOptions">Show Lunch Options</button>
-<button ng-click="lunch.showOrders =! lunch.showOrders">Show My Orders</button>
-
+    <button ng-click="lunch.showOptions =! lunch.showOptions" class="btn orange">Show Lunch Options</button>
+    <button ng-click="lunch.openOrders =! lunch.openOrders" class="btn orange">My Open Orders</button>
+    <button ng-click="lunch.pastOrders =! lunch.pastOrders" class="btn orange">My Past Orders</button>
 
 <!--Order Options-->
-<div ng-show="lunch.showOptions">
+    <div ng-show="lunch.showOptions" class="order orderCenter">
+        <h1 class='cursor pull-right' ng-click='lunch.showOptions =! lunch.showOptions'>X</h1>
+        <h1>Lunch Options</h1>
+        <div class="fileScroll">
+            <div ng-repeat="restaurants in lunch.restaurants |filter: {completed:false} | orderBy:'date'" class="col-xs-4">
+                <h1>{{restaurants.date.substr(5,5)}}</h1>
+                <h3>{{restaurants.restaurant}}</h3>
+                <a href="{{restaurants.menu}}" target="_blank"><h4>menu</h4></a>
+                <br>
+                <button type="submit" ng-click="lunch.orderModal(restaurants.restaurant, restaurants.menu, restaurants.date)" class="btn">Order {{restaurants.restaurant}}</button>
+            </div>
+        </div>
 
-
-<form ng-repeat="restaurants in lunch.restaurants">
-    <h1>{{restaurants.day[0]}} {{restaurants.date}}</h1>
-    <h4>{{restaurants.restaurant}}</h4>
-    <a href="{{restaurants.menu}}" target="_blank">menu</a>
-    <br>
-    <button type="submit" ng-click="lunch.orderModal(restaurants.restaurant, restaurants.menu, restaurants.day, restaurants.date)">Order {{restaurants.restaurant}}</button>
-</form>
-
-
-<!--<div ng-repeat="restaurants in lunch.restaurants | filter: 'tuesday'">
-    <h1 ng-if="restaurants[0]">Tuesday {{restaurants.date}}</h1>
-    <h4>{{restaurants.restaurant}}</h4>
-    <a href="{{restaurants.menu}}" target="_blank">menu</a>
-    <br>
-    <button type="submit" ng-click="lunch.orderModal(restaurants.restaurant, restaurants.menu, 'Tuesday')">Order {{restaurants.restaurant}}</button>
-</div>
-
-<div ng-repeat="restaurants in lunch.restaurants | filter: 'wednesday'">
-    <h1 ng-if="restaurants[0]">Wednesday {{restaurants.date}}</h1>
-    <h4>{{restaurants.restaurant}}</h4>
-    <a href="{{restaurants.menu}}" target="_blank">menu</a>
-    <br>
-    <button type="submit" ng-click="lunch.orderModal(restaurants.restaurant, restaurants.menu, 'Wednesday')">Order {{restaurants.restaurant}}</button>
-</div>
-
-<div ng-repeat="restaurants in lunch.restaurants | filter: 'thursday'">
-    <h1 ng-if="restaurants[0]">Thursday {{restaurants.date}}</h1>
-    <h4>{{restaurants.restaurant}}</h4>
-    <a href="{{restaurants.menu}}" target="_blank">menu</a>
-    <br>
-    <button type="submit" ng-click="lunch.orderModal(restaurants.restaurant, restaurants.menu, 'Thursday')">Order {{restaurants.restaurant}}</button>
-</div>
-
-<div ng-repeat="restaurants in lunch.restaurants | filter: 'friday'">
-    <h1 ng-if="restaurants[0]">Friday {{restaurants.date}}</h1>
-    <h4>{{restaurants.restaurant}}</h4>
-    <a href="{{restaurants.menu}}" target="_blank">menu</a>
-    <br>
-    <button type="submit" ng-click="lunch.orderModal(restaurants.restaurant, restaurants.menu, 'Friday')">Order {{restaurants.restaurant}}</button>
-</div>-->
-
-</div>
-
-
-<!--Past Orders-->
-<div ng-show="lunch.showOrders">
-
-    <div ng-repeat="orders in lunch.myOrders">
-        <h2>{{orders.day}}</h2>
-        <h3>Restaurant: {{orders.restaurant}}</h3>
-        <h3>Food Ordered: {{orders.food}}</h3>
-        <h3>Drink Ordered: {{orders.drink}}</h3>
     </div>
 
-</div>
+
+<!--Open Orders-->
+    <div ng-show="lunch.openOrders" class="order">
+        <h1 class='cursor pull-right' ng-click='lunch.openOrders =! lunch.openOrders'>X</h1>
+        <h1 class="orderCenter">Open Orders</h1>
+
+        <div ng-repeat="orders in lunch.myOrders | filter: {completed:false} | orderBy:'date'" class="col-xs-4">
+            <h5>Date: {{orders.date.substr(5,5)}}</h5>
+            <h5>Restaurant: {{orders.restaurant}}</h5>
+            <h5>Food Ordered: {{orders.food}}</h5>
+            <h5>Drink Ordered: {{orders.drink}}</h5>
+        </div>
+
+    </div>
+
+<!--Past Orders-->
+    <div ng-show="lunch.pastOrders" class="order">
+        <h1 class='cursor pull-right' ng-click='lunch.pastOrders =! lunch.pastOrders'>X</h1>
+        <h1 class="orderCenter">Past Orders</h1>
+
+        <div ng-repeat="orders in lunch.myOrders | filter: {completed:true} | orderBy:'date'" class="col-xs-4">
+            <h5>Date: {{orders.date.substr(5,5)}}</h5>
+            <h5>Restaurant: {{orders.restaurant}}</h5>
+            <h5>Food Ordered: {{orders.food}}</h5>
+            <h5>Drink Ordered: {{orders.drink}}</h5>
+            <h5>Cost: {{orders.cost}}</h5>
+        </div>
+
+    </div>
 
 
 <!--Order Modale-->
-<div class="background" ng-show="lunch.orderModale">
-<form class="order" >
-    <h1 class='cursor pull-right' ng-click='lunch.order.success()'>X</h1>
-    <h1 class='form-title'>Order lunch from {{lunch.restaurantChoosen}} for {{lunch.day}} {{lunch.date}}</h1>
-    <a href="{{lunch.menuChoosen}}" target="_blank">menu</a>
+    <div class="background" ng-show="lunch.orderModale">
+    <form class="order orderCenter" >
+        <h1 class='cursor pull-right' ng-click='lunch.orderModale =! lunch.orderModale; lunch.showOptions =! lunch.showOptions'>X</h1>
+        <h1 class='form-title'>Order lunch from {{lunch.restaurantChoosen}} for {{lunch.date.substr(5,5)}}</h1>
+        <a href="{{lunch.menuChoosen}}" target="_blank"><h3>menu</h3></a>
 
 
-    <div class="form-group">
-        <label for="food">Food Order</label>
-        <input type="text" class="form-control" id="food" placeholder="food order" ng-model='lunch.foodOrder'>
+        <div class="form-group">
+            <label for="food" class="pull-left">Food Order</label>
+            <input type="text" class="form-control" id="food" placeholder="food order" ng-model='lunch.foodOrder'>
+        </div>
+
+        <div class="form-group">
+            <label for="drink" class="pull-left">Drink Order</label>
+            <input type='text' class="form-control" id="drink" placeholder="drink order" ng-model='lunch.drinkOrder'>
+        </div>
+
+        <div class="form-group"> 
+            <button type="submit" class="btn btn-default" ng-click='lunch.order()'>Submit</button>
+        </div>
+    </form>
     </div>
-
-    <div class="form-group">
-        <label for="drink">Drink Order</label>
-        <input type='text' class="form-control" id="drink" placeholder="drink order" ng-model='lunch.drinkOrder'>
-    </div>
-
-    <div class="form-group"> 
-        <button type="submit" class="btn btn-default" ng-click='lunch.order()'>Submit</button>
-    </div>
-</form>
 </div>

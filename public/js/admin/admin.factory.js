@@ -25,12 +25,36 @@ angular.module('lunch')
         method: 'GET',
         url: '/restaurants'
         })
+    };
+
+    function newRestaurant(restaurant,menu,date){
+        return $http({
+            method: 'POST',
+            url: '/newRestaurant',
+            data: {
+                restaurant:restaurant,
+                menu:menu,
+                date:date
+            }
+        })
+    }
+
+    function costPerPerson(cost,date){
+        return $http({
+            method: 'PUT',
+            url: '/costPerPerson'+date,
+            data: {
+                cost:cost,
+            }
+        })
     }
     
       return{
           me:me,
           orders:orders,
-          options:options
+          options:options,
+          newRestaurant:newRestaurant,
+          costPerPerson:costPerPerson
           
       }
 

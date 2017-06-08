@@ -1,47 +1,70 @@
-<div ng-hide="admin.ordersModal">
+<div class="nonPrintable">
     <h1>Welcome to the Admin Account</h1>
 
-    <div ng-repeat="options in admin.options">
-        <h2>Orders for {{options.restaurant}} for {{options.day[0]}} {{options.date}}</h2>
-        <h6 ng-click="admin.viewOrders(options.day[0],options.date,options.restaurant)">view orders / input price</h6>
-    </div>
-
-    <!--<h2>Monday Orders</h2>
-    <h6 ng-click="admin.viewOrders('monday')">view orders / input price</h6>
-    <h2>Tuesday Orders</h2>
-    <h6 ng-click="admin.viewOrders('tuesday')">view orders / input price</h6>
-    <h2>Wednesday Orders</h2>
-    <h6 ng-click="admin.viewOrders('wednesday')">view orders / input price</h6>
-    <h2>Thursday Orders</h2>
-    <h6 ng-click="admin.viewOrders('thursday')">view orders / input price</h6>
-    <h2>Friday Orders</h2>
-    <h6 ng-click="admin.viewOrders('friday')">view orders / input price</h6>-->
+    <button ng-click="admin.currentOrdersModal =! admin.currentOrdersModal" class="btn orange">current orders</button>
+    <button ng-click="admin.completedOrdersModal =! admin.completedOrdersModal" class="btn orange">completed orders</button>
+    <button ng-click="admin.newRestaurantModal =! admin.newRestaurantModal" class="btn orange">input new restaurant info</button>
 </div>
-
-
-<!--Order Modale-->
-<div class="background" ng-show="admin.ordersModal">
-<form class="order" >
-    <h1 class='cursor pull-right' ng-click='admin.ordersModal =! admin.ordersModal'>X</h1>
-    <h1 class='form-title'>Orders for {{admin.day}} {{admin.date}} for {{admin.restaurant}}</h1>
-
-    <div class="container">
-        <div class="row">
-            <div ng-repeat="orders in admin.orders | filter:admin.day" class="col-sm-3 adminOrders">
-                <h6>Employee Name: {{orders.name}}</h6>
-                <h6>Restaurant: {{orders.restaurant}}</h6>
-                <h6>Food Order: {{orders.food}}</h6>
-                <h6>Drink Order:{{orders.drink}}</h6>
-                <h1>{{orders.restaurant.length}}</h1>
-                <br>
-            </div>
+<!--Current Orders-->
+    <div ng-show="admin.currentOrdersModal" class="order orderCenter nonPrintable">
+        <h1 class='cursor pull-right' ng-click='admin.currentOrdersModal =! admin.currentOrdersModal'>X</h1>
+        <h1>Current Orders</h1>
+        <div ng-repeat="options in admin.options | filter: {completed:false}| orderBy:'date'" class="col-xs-4">
+            <h2 >{{options.date.substr(5,5)}}</h2>
+            <h4> for {{options.restaurant}}</h4>
+            <button ng-click="admin.viewOrders(options.day[0],options.date,options.restaurant); admin.currentOrdersModal =! admin.currentOrdersModal" class="btn">view orders / input price</button>
         </div>
     </div>
 
-    <div class="form-group"> 
-        <h4>Total cost of {{admin.day}}'s order <input type="number" ng-model="admin.cost"></h4>
-        
-        <button type="submit" class="btn btn-default" ng-click='admin.orderCost()'>Submit Order Cost</button>
+<!--Completed Orders-->
+    <div ng-show="admin.completedOrdersModal" class="order orderCenter nonPrintable">
+        <h1 class='cursor pull-right' ng-click='admin.completedOrdersModal =! admin.completedOrdersModal'>X</h1>
+        <h1>Completed Orders</h1>
+        <div ng-repeat="options in admin.options | filter: {completed:true}| orderBy:'date'" class="col-xs-4">
+            <h2 >{{options.date.substr(5,5)}}</h2>
+            <h4> for {{options.restaurant}}</h4>
+            <button ng-click="admin.viewOrders(options.day[0],options.date,options.restaurant); admin.completedOrdersModal =! admin.completedOrdersModal" class="btn">view order / edit price</button>
+        </div>
     </div>
-</form>
+
+<!--Order Modale-->
+<div class="container" ng-show="admin.ordersModal" >
+    <form class="order" >
+        <h1 class='cursor pull-right nonPrintable' ng-click='admin.ordersModal =! admin.ordersModal'>X</h1>
+        <h1 class='form-title'>Orders for {{admin.date.substr(5,5)}} for {{admin.restaurant}}</h1>
+
+            <div class="row ">
+                <div ng-repeat="orders in admin.orders | filter:admin.date as filtered" class="col-xs-3 adminOrders">
+                    <h6>Employee Name: {{orders.name}}</h6>
+                    <h6>Restaurant: {{orders.restaurant}}</h6>
+                    <h6>Food Order: {{orders.food}}</h6>
+                    <h6>Drink Order:{{orders.drink}}</h6>
+                    <br>
+                </div>
+            </div>
+
+            <div class="form-group"> 
+                <h4 ng-hide="print" class="nonPrintable">Total cost of this order 
+                    <input type="number" ng-model="admin.cost">   
+                    <button type="submit" class="" ng-click='admin.orderCost(filtered.length,admin.date)'>Submit</button>
+                    <button ng-click='admin.print()' class="nonPrintable pull-right">Print</button>
+                </h4>
+            </div>
+    </form>
+</div>
+
+<!--New Restaurant Modale-->
+<div ng-show="admin.newRestaurantModal" >
+    <form class="order orderCenter nonPrintable" >
+        <h1 class='cursor pull-right' ng-click='admin.newRestaurantModal =! admin.newRestaurantModal'>X</h1>
+        <h1 class='form-title'>Input new restaurant</h1>
+
+            <h6>Restaurant: <input ng-model="admin.newRestaurant" type="text"></h6>
+            <h6>Menu url: <input ng-model="admin.newRestaurantMenu" type="text"></h6>
+            <h6>Date: <input ng-model="admin.newRestaurantDate" type="date"></h6>
+
+        <div class="form-group"> 
+            <button type="submit" class="btn btn-default" ng-click='admin.addNewRestaurant()'>Submit Order Cost</button>
+        </div>
+    </form>
 </div>

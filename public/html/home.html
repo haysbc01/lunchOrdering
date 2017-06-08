@@ -1,17 +1,17 @@
 <div class='background'></div>
 
 <!--Login-->
-<form class="order" ng-hide="auth.signUp">
+<form class="login" ng-hide="auth.signUp">
     <h1 class='form-title'>Welcome OneSpace Employee</h1>
 
 
     <div class="form-group">
-        <label for="Email">Email address</label>
+        <label for="Email" class="pull-left">Email address</label>
         <input type="email" class="form-control" id="Email" placeholder="Email" ng-model='auth.email'>
     </div>
 
     <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password" class="pull-left">Password</label>
         <input type='password' class="form-control" id="password" placeholder="Password" ng-model='auth.password'>
     </div>
 
@@ -25,26 +25,26 @@
 
 <!--Register-->
 
-<form class="order" ng-show='auth.signUp'>
+<form class="login" ng-show='auth.signUp'>
   <h1 class='form-title'>Register</h1>
 
     <div class="form-group">
-        <label for="Name">First Name</label>
+        <label for="Name" class="pull-left">First Name</label>
         <input type="text" placeholder="First Name" ng-model='auth.firstName' class="form-control" required>
     </div>
 
     <div class="form-group">
-        <label for="Email">Email address</label>
+        <label for="Email" class="pull-left">Email address</label>
         <input ng-class='{red: auth.emailField === true}' type="email" class="form-control" placeholder="Email" ng-model='auth.registerEmail' required>
     </div>
 
     <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password" class="pull-left">Password</label>
         <input ng-class='{red: auth.noPassMatch === true}' type='password' class="form-control" placeholder="Password" ng-model='auth.registerPassword' required>
     </div>
 
     <div class="form-group">
-        <label for="password">Confirm Password</label>
+        <label for="password" class="pull-left">Confirm Password</label>
         <input ng-class='{red: auth.noPassMatch === true}' type='password' class="form-control" placeholder="Confirm Password" ng-model='auth.confirmPassword' required>
     </div>
 

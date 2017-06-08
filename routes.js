@@ -19,4 +19,6 @@ module.exports = (app) => {
   app.get('/restaurants',lunch.restaurants);
   app.post('/getMyOrders',lunch.getMyOrders);
   app.post('/placeOrder',lunch.placeOrder);
+  app.post('/newRestaurant',admin.newRestaurant);
+  app.put('/costPerPerson:id',admin.costPerPerson);
 };

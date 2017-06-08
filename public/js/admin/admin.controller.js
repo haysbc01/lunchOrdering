@@ -6,6 +6,11 @@ adminCtrl.$inject = ['$http', 'adminFactory'];
 function adminCtrl ($http, adminFactory){
   var admin = this;
 
+  // admin.currentOrdersModal=true;
+  // admin.completedOrdersModal=true;
+  // admin.newRestaurantModal=false;
+  // admin.newRestaurantModal=true;
+
   admin.load = function(){
       adminFactory
         .me()
@@ -30,6 +35,7 @@ function adminCtrl ($http, adminFactory){
         })
     };
 
+
   admin.viewOrders = function(day,date,restaurant){
     admin.ordersModal=true;
     admin.day=day;
@@ -37,9 +43,21 @@ function adminCtrl ($http, adminFactory){
     admin.restaurant=restaurant;
   };
 
-  admin.orderCost = function(){
-    divided=admin.cost/6
-    console.log(divided)
+  admin.orderCost = function(num,date){
+    perPerson=admin.cost/num
+    
+    adminFactory
+      .costPerPerson(perPerson,date)
+  };
+
+  admin.addNewRestaurant =function(){
+    console.log(admin.newRestaurantDate)
+    adminFactory
+      .newRestaurant(admin.newRestaurant,admin.newRestaurantMenu,admin.newRestaurantDate)
+  };
+
+  admin.print = function(){
+    window.print();
   }
 
     admin.load();

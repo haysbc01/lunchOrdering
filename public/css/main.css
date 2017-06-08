@@ -1,22 +1,73 @@
-.order{
+.login{
     position: fixed;
     left: 50vw;
     top: 50vh;
-    width: 700px;
+    width: 50vw;
     transform: translate(-50%,-50%);
     border: 2px solid black;
     border-radius: 5px;
     background: #EC802B;
 }
 
+.order{
+    position: relative;
+    left: 50vw;
+    margin-top: 50px;
+    width: 75vw;
+    height: 500px;
+    transform: translate(-50%,0%);
+    border: 2px solid black;
+    border-radius: 5px;
+    background: #EC802B;
+    text-align: left; 
+}
+
+.orderCenter{
+    text-align: center;
+}
+
 .background{
-    position: fixed;
+    /*position: fixed;*/
     background: #35A9B8;
     height: 100vh;
     width: 100vw;
     top: 0px;
+    text-align: center;
 }
 
 .adminOrders{
     height: 200px;
+}
+
+.orange{
+    background: #EC802B;
+}
+
+.fileScroll{
+  overflow: scroll;
+  height: 100%;
+}
+
+@media print {
+   .backgroung {
+        display: none;
+        background: white;
+        height: 100vh;
+        width: 100vw;
+        top: 0px;
+    }
+    .order {
+        /*display: block;*/
+        position: 0;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        transform: translate(0);
+        border: 0px solid black;
+        border-radius: 0;
+        background:0;
+    }
+    .nonPrintable{
+        visibility: hidden;
+    }
 }
