@@ -33,6 +33,7 @@
             <h5>Restaurant: {{orders.restaurant}}</h5>
             <h5>Food Ordered: {{orders.food}}</h5>
             <h5>Drink Ordered: {{orders.drink}}</h5>
+            <h5>{{orders.completed}}</h5>
         </div>
 
     </div>
@@ -42,12 +43,13 @@
         <h1 class='cursor pull-right' ng-click='lunch.pastOrders =! lunch.pastOrders'>X</h1>
         <h1 class="orderCenter">Past Orders</h1>
 
-        <div ng-repeat="orders in lunch.myOrders | filter: {completed:true} | orderBy:'date'" class="col-xs-4">
+        <div ng-repeat="orders in lunch.myOrders | filter: {completed:'true'} | orderBy:'date'" class="col-xs-4">
             <h5>Date: {{orders.date.substr(5,5)}}</h5>
             <h5>Restaurant: {{orders.restaurant}}</h5>
             <h5>Food Ordered: {{orders.food}}</h5>
             <h5>Drink Ordered: {{orders.drink}}</h5>
             <h5>Cost: {{orders.cost}}</h5>
+            <h5>{{orders.completed}}</h5>
         </div>
 
     </div>
